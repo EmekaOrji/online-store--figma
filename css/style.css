@@ -702,6 +702,9 @@ header {
   #badgeText {
     display: none;
   }
+  .services_content {
+    overflow-y: scroll;
+  }
   .service {
     width: 32%;
   }
