@@ -11,16 +11,30 @@ const history = document.querySelector(".history_header");
 speechText.onclick = () => {
   input.focus();
 }
-mic.onclick = activateMic;
+mic.onclick = activateMicButton;
 mic.onblur = deActivateMic;
-document.onkeydown = (e) => {
-  e = e || window.event;
-  var key = e.which || e.keyCode;
-  if(key === 83){
+handleSpeech();
+
+function handleSpeech() {
+  document.onkeydown = (e) => {
+    e = e || window.event;
+    var key = e.which || e.keyCode;
+    if(key === 83){
       activateMic();
+    }
+  }
+  document.onkeyup = (e) => {
+    e = e || window.event;
+    var key = e.which || e.keyCode;
+    if(key === 83){
+      deActivateMic();
+    }
   }
 }
 function activateMic() {
+  mic.classList.add("mic_active");
+}
+function activateMicButton() {
   mic.classList.toggle("mic_active");
 }
 function deActivateMic() {
