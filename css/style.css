@@ -4,13 +4,14 @@
   --nav_bg: #fff8;
   --nav_shadow: 0px 2px 10px #0001;
   --message_color: #000;
-  --mic_bg: #fffc;
+  --mic_bg: #9ca8c0;
   --dark-display: 0;
   --light-display: 1;
   --body_bg: #e3edff;
   --service_bg: #fffa;
   --service_color: #363a43;
   --service_hover_bg: #fffc;
+  --service_svg: #7f899d;
   --order_border: #fffd;
   --input_color: #656d7c;
   --mobile-blend: #dadbff;
@@ -30,6 +31,7 @@
   --service_bg: var(--nav_bg);
   --service_color: #b6c4e1;
   --service_hover_bg: #ffffff20;
+  --service_svg: #b5c4e1;
   --order_border: #373c44;
   --input_color: #f5f8ff;
   --mobile-blend: #0e1331;
@@ -444,11 +446,39 @@ header {
   border-radius: 50%;
   padding: 1.15em;
   margin-left: .5em;
-  background: var(--mic_bg);
+  background: #fffc;
   border: none;
   box-shadow: 0px 2px 10px #0001;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  position: relative;
+}
+#speechIcon * {
+  transition: 160ms all ease;
+}
+.mic_active svg {
+  fill: #595f6d;
+}
+.mic_active::before, .mic_active::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid var(--mic_bg);
+  animation: echo 500ms ease infinite;
+}
+.mic_active::after {
+  animation-delay: 250ms;
+}
+@keyframes echo {
+  to {
+    transform: scale(2);
+    opacity: 0;
+    border-width: 3px;
+  }
 }
 
 
@@ -532,7 +562,7 @@ header {
   transition: all 180ms ease-out;
 }
 .service:hover svg {
-  fill: #7f899d;
+  fill: var(--service_svg);
 }
 .service_text {
   font-size: .85em;
@@ -568,6 +598,7 @@ header {
   background: var(--service_bg);
   background: linear-gradient(to right, var(--service_gradient) 70%, transparent 100%);
   z-index: 1;
+  transition: all 500ms ease-in-out;
 }
 .service:not(#orders):hover .service_icon::before {
   width: 70%;
